@@ -94,7 +94,9 @@ export const obtenerCodigoBarras = async( req : Request, res : Response ) => {
 
 		// const imageCanvas = generateCodeBar( computadora!._id.toString() );
 
-		const imageCanvas = await generateQRCode( computadora!._id.toString() );
+		const imageCanvas = await generateQRCode( 			
+			`${process.env.BASE_URL}/equipo?equipoid=${computadora!._id.toString()}` 
+		);
 
 		//create the headers for the response
 		//200 is HTTTP status code 'ok'
@@ -176,6 +178,31 @@ export const obtenerImagen = async(req : Request, res : Response) => {
         console.log(error);
         res.status( 500 ).json({
             msg: '[ERROR]: No se pudo actualizar la fotografia. Contacte con el administrador.'
+        })
+    }
+}
+
+
+
+export const actulizarComputadora = async ( req: Request, res: Response ) => {
+	try {
+
+		const {
+			_id,	
+			campo,
+			value		
+		} = req.body.equipo;
+
+		const computadora = await Computadora.findById( _id );
+
+		computadora![campo as 'nombreEquipo'] = value;
+
+		computadora!.save();
+
+	} catch (error){
+        console.log(error);
+        res.status( 500 ).json({
+            msg: '[ERROR]: No se pudo actualizar la computadora. Contacte con el administrador.'
         })
     }
 }

@@ -162,6 +162,9 @@ const ComputadoraSchema = new Schema({
         type: Boolean,
         required: [true, 'Se debe indicar si se cuenta con internet en la computadora']
     },
+    interfazInternet: {
+        type: String
+    },
     ip: {
         type: String
     },

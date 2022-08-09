@@ -56,12 +56,12 @@ class Server {
 
     routes() {
 
-        this.app.use(this.paths.usuarios, userRoutes);
-        this.app.use(this.paths.auth, authRoutes);
+        this.app.use( this.paths.usuarios       , userRoutes );
+        this.app.use( this.paths.auth           , authRoutes );
 
-        this.app.use( this.paths.sedes,  sedesRoutes);
-        this.app.use( this.paths.unidades,  unidadesRoutes);
-        this.app.use( this.paths.computadoras, compusRoutes);
+        this.app.use( this.paths.sedes          , sedesRoutes );
+        this.app.use( this.paths.unidades       , unidadesRoutes );
+        this.app.use( this.paths.computadoras   , compusRoutes );
     }
 
     middlewares() {
@@ -110,8 +110,9 @@ class Server {
 
         // serve the API with signed certificate on 443 (SSL/HTTPS) port
         const httpsServer = https.createServer({
-            key:  fs.readFileSync(process.env.CERTIFICATE_KEY || ''),
-            cert: fs.readFileSync(process.env.CERTIFICATE || ''),
+            key:    fs.readFileSync(process.env.CERTIFICATE_KEY || ''),
+            cert:   fs.readFileSync(process.env.CERTIFICATE || ''),
+            ca:     fs.readFileSync(process.env.CERTIFICATE_CA || ''),
         }, this.app);
 
         httpsServer.listen(this.PORT, () => {
@@ -122,7 +123,3 @@ class Server {
 }
 
 export default Server;
-
-//https://farm4.sat.gob.gt/japSitio-web/certificacion/tarjetaElectronicaVehiculosQR.jsf?c2=6K2vT8Hnndg=&c3=U4Wy%2Bzvvyzy3ZDvxy4EOwNUgX3nt%2FMcdkDXn8DhtYss%3D
-//https://farm4.sat.gob.gt/japSitio-web/certificacion/tarjetaElectronicaVehiculosQR.jsf?c2=6K2vT8Hnndg=&U4Wy%2Bzvvyzy3ZDvxy4EOwNUgX3nt%2FMcdkDXn8DhtYss%3D
-//https://farm2.sat.gob.gt/japSitio-web/calcomanias/calcomaniaElectronica.jsf?c2=6K2vT8Hnndg=&c3=U4Wy%2Bzvvyzy3ZDvxy4EOwNUgX3nt%2FMcdkDXn8DhtYss%3D
