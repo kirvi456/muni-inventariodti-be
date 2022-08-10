@@ -74,7 +74,7 @@ export const crearComputadora = async( req : Request, res : Response ) => {
 
         const compuGuardada = await compuInstancia.save();
 
-        res.json({ compuGuardada })
+        res.json(compuGuardada)
 
     } catch ( error ){
         console.log( error );
