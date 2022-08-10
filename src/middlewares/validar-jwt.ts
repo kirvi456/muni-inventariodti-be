@@ -13,7 +13,7 @@ function verifyDecodedToken(data: unknown): asserts data is IUsuario {
 
 export const validarJWT = async(req : Request, res : Response, next : NextFunction) => {
 
-    const token = req.header('x-token');
+    const token = req.header('X-Access-Token');
 
     if( !token ){
         return res.status(401).json({
