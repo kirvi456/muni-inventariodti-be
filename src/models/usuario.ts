@@ -1,7 +1,6 @@
 import { Schema, model } from 'mongoose';
 
 export interface IUsuario {
-    uid: string;
     nombre: string;
     usuario: string;
     correo: string;
@@ -12,11 +11,6 @@ export interface IUsuario {
 } 
 
 const UsuarioSchema = new Schema({
-    uid: {
-        type : String,
-        required: [true, 'El UID es obligatorio'],
-        unique: true
-    },
     nombre: {
         type : String,
         required: [true, 'El nombre es obligatorio']
@@ -50,8 +44,7 @@ const UsuarioSchema = new Schema({
 
 
 UsuarioSchema.methods.toJSON = function() {
-    const {__version, __v, pw, _id, ...usuario} = this.toObject();
-    usuario.mongoID = _id;
+    const {__version, __v, pw, ...usuario} = this.toObject();
     return usuario;
 }
 

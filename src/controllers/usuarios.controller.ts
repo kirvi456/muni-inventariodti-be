@@ -7,8 +7,6 @@ import Usuario from '../models/usuario';
 import { subirArchivo, obtenerArchivoPath } from '../helpers/subir-archivo';
 
 
-import { v4 as uuidv4 } from 'uuid';
-
 export const getUsuarios = async(req : Request, res : Response) => {
     
     const { limit = 5, begin = 0 } = req.query;
@@ -38,10 +36,6 @@ export const postUsuarios = async(req : Request, res : Response) => {
         // salt: numero de vueltas de encriptado, por defecto 10 (esto esta bien)
         const salt = bcryptjs.genSaltSync();
         nuevoUsuario.pw = bcryptjs.hashSync(pw, salt);
-    
-        // Agregar el UUID 
-        const nuevoId = uuidv4();
-        nuevoUsuario.uid = nuevoId;
     
         await nuevoUsuario.save();
     
@@ -75,7 +69,7 @@ export const putUsuarios = async(req : Request, res : Response) => {
 
 export const actulizarImg = async(req : Request, res : Response) => {
     try {
-        const id = req.currentUser.uid;
+        const id = req.currentUser._id;
         const imgAnterior = req.currentUser.img;
 
         // Actualizar imagen borrando la anterior      
