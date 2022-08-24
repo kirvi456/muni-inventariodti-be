@@ -7,8 +7,8 @@ import Usuario, { IUsuario } from '../models/usuario';
 function verifyDecodedToken(data: unknown): asserts data is IUsuario {
     if (!(data instanceof Object)) 
         throw new Error('Decoded token error. Token must be an object');
-    if (!('uid' in data)) 
-        throw new Error('Decoded token error. Missing required field "uid"');
+    if (!('_id' in data)) 
+        throw new Error('Decoded token error. Missing required field "_id"');
 }
 
 export const validarJWT = async(req : Request, res : Response, next : NextFunction) => {
@@ -26,7 +26,7 @@ export const validarJWT = async(req : Request, res : Response, next : NextFuncti
 
         verifyDecodedToken( decoded );
 
-        const usuario = await Usuario.findById( decoded.uid );
+        const usuario = await Usuario.findById( decoded._id );
 
         // Verificar que el usuario existe
         if( !usuario ){

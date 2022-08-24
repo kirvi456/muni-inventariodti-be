@@ -1,6 +1,7 @@
 import { Schema, model } from 'mongoose';
 
 export interface IUsuario {
+    _id: string;
     nombre: string;
     usuario: string;
     correo: string;

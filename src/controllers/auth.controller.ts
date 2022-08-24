@@ -6,7 +6,9 @@ import { generarJWT } from "../helpers/generar-jwt";
 import Usuario from "../models/usuario";
 
 export const login = async (req: Request, res: Response) => {
+
     const { usuario, pw } = req.body;
+
     try {
         // Verificar si el email existe
         const usuarioInstancia = await Usuario.findOne({ $or:[{usuario}, {correo: usuario}] });
@@ -32,7 +34,7 @@ export const login = async (req: Request, res: Response) => {
         }
 
         // Generar el JWT
-        const token = await generarJWT( usuarioInstancia.id );
+        const token = await generarJWT( usuarioInstancia._id.toString() );
 
         res.json({
             usuarioInstancia,
@@ -44,5 +46,6 @@ export const login = async (req: Request, res: Response) => {
             msg: "Hable con el administrador",
         });
     }
+    
 };
 
