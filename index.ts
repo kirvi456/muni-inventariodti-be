@@ -6,5 +6,5 @@ dotenv.config()
 const server = new Server();
 
 
-server.start();
-
+if( process.env.MODE && process.env.MODE === 'prod' ) server.startHttps();
+else server.start();
