@@ -171,7 +171,7 @@ export const obtenerImagen = async(req : Request, res : Response) => {
 
 
         // Obtener la ruta del archivo o el notFound     
-        const archivo = await obtenerArchivoPath('computadoras/fotos', img, 'not-avatar.png');
+        const archivo = await obtenerArchivoPath('computadoras/fotos', img, 'not-pc.jpg');
 
         res.sendFile( archivo );
     } catch (error){

@@ -93,7 +93,7 @@ export const obtenerAvatar = async(req : Request, res : Response) => {
 
 
         // Obtener la ruta del archivo o el notFound     
-        const archivo = await obtenerArchivoPath('usuarios/avatars', img, 'not-avatar.png');
+        const archivo = await obtenerArchivoPath('usuarios/avatars', img, 'not-avatar.jpg');
 
         res.sendFile( archivo );
     } catch (error){
