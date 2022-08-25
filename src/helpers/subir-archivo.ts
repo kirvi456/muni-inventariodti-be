@@ -66,7 +66,7 @@ export const obtenerArchivoPath = (
             return resolve( archivoEnviarPath );
         }
         return resolve ( 
-            fs.existsSync( archivoEnviarPath ) 
+            fs.existsSync( pathNotFound ) 
             ? pathNotFound  
             : '/sin_ruta/img.png'
         );
