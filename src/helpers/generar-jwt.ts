@@ -12,7 +12,7 @@ export const generarJWT = ( _id : string ) => {
             payload, 
             secret!, 
             {
-                expiresIn: '2d'
+                expiresIn: '30s'
             }, 
             (err, token) =>{
                 if(err){

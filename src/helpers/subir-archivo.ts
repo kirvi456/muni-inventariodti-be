@@ -65,7 +65,11 @@ export const obtenerArchivoPath = (
         if (archivoName !== '' && archivoName && fs.existsSync( archivoEnviarPath )){
             return resolve( archivoEnviarPath );
         }
-        return resolve( pathNotFound );
+        return resolve ( 
+            fs.existsSync( archivoEnviarPath ) 
+            ? pathNotFound  
+            : '/sin_ruta/img.png'
+        );
     })
 
 }

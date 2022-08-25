@@ -46,6 +46,28 @@ export const login = async (req: Request, res: Response) => {
             msg: "Hable con el administrador",
         });
     }
+
+};
+
+
+
+export const validarSesion = async (req: Request, res: Response) => {
+
+    try {
+        
+
+        res.json({
+            tokenValido : true
+        });
+
+    } catch (error) {
+
+        console.log(error);
+        res.status(500).json({
+            tokenValido: false,
+        });
+
+    }
     
 };
 
