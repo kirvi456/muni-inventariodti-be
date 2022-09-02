@@ -5,6 +5,8 @@ import {
     actulizarComputadora,
     actulizarImg, 
     crearComputadora, 
+    getIPS, 
+    getPCS, 
     obtenerCodigoBarras, 
     obtenerImagen,
     obtenerPC
@@ -66,15 +68,6 @@ router.put(
     actulizarImg
 )
 
-router.get(
-    '/:_id',
-    [
-        check('_id', 'El ID no es valido').isMongoId(),
-        check('_id').custom( exitePC ),
-        validarCampos
-    ],
-    obtenerPC
-)
 
 router.get(
     '/imagen/:_id',
@@ -98,12 +91,16 @@ router.get(
     obtenerCodigoBarras
 )
 
-// Crear Computadora
+// Actualizar Computadora
 router.put(
     '/',
     [
         validarJWT,
         esAdmin,
+
+        // Verificar que si exista la computadora
+        check('_id', 'El ID no es valido').isMongoId(),
+        check('_id').custom( exitePC ),
         // campos obligatorios
         check('nombreEquipo', 'El Nombre del equipo es obligatorio').not().isEmpty(),
         check('unidad', 'Se debe especificar la Unidad/Dirección ').not().isEmpty(),
@@ -132,15 +129,40 @@ router.put(
         check('unidad').custom( existeUnidad ),
 
         check('responsable').custom( responsableNotEmpty ),       
-        
-        check('_id', 'El ID no es valido').isMongoId(),
-        check('_id').custom( exitePC ),
-        
+                
         validarCampos
     ],
     actulizarComputadora
 )
 
+router.get(
+    '/ips',
+    [
+
+    ],
+    getIPS
+)
+
+router.get(
+    '/:_id',
+    [
+        check('_id', 'El ID no es valido').isMongoId(),
+        check('_id').custom( exitePC ),
+        validarCampos
+    ],
+    obtenerPC
+)
 
 
+router.get(
+    '/',
+    [
+        check('sedeID', 'No se especifico la sede').not().isEmpty(),
+        check('sedeID', 'Sede ID no es valido').isMongoId(),
+        check('unidadID', 'No se especifico la unidad').not().isEmpty(),
+        check('unidadID', 'Unidad ID no es valido').isMongoId(),
+        validarCampos
+    ],
+    getPCS
+)
 export default router;

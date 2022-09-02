@@ -15,6 +15,7 @@ import authRoutes from '../routes/auth.routes';
 import sedesRoutes from '../routes/sedes.routes';
 import unidadesRoutes from '../routes/unidades.routes';
 import compusRoutes from '../routes/computadoras.routes';
+import actualizacionesRoutes from '../routes/actualizaciones.routes';
 
 class Server {
     
@@ -33,7 +34,8 @@ class Server {
 
         sedes:              '/api/sedes',
         unidades:           '/api/unidades',
-        computadoras:       '/api/PCS'
+        computadoras:       '/api/PCS',
+        actualizaciones:    '/api/actualizaciones',
     };
 
     constructor(){
@@ -62,6 +64,7 @@ class Server {
         this.app.use( this.paths.sedes          , sedesRoutes );
         this.app.use( this.paths.unidades       , unidadesRoutes );
         this.app.use( this.paths.computadoras   , compusRoutes );
+        this.app.use( this.paths.actualizaciones, actualizacionesRoutes );
     }
 
     middlewares() {
