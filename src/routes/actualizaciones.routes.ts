@@ -17,10 +17,10 @@ router.post(
         check('equipo', 'Equipo no es un mongo Id valido').isMongoId(),
         check('equipo').custom( exitePC ),
 
-        check('nombreComponente', 'Se debe especificar el tipo de componente que se esta actualizando'),
-        check('descAnterior', 'Se debe especificar el componente que se esta actualizando'),
-        check('descNuevo', 'Se debe especificar el componente con el que se esta reemplazando'),
-        check('motivo', 'Se debe especificar el motivo del cambio'),
+        check('nombreComponente', 'Se debe especificar el tipo de componente que se esta actualizando').not().isEmpty(),
+        check('descAnterior', 'Se debe especificar el componente que se esta actualizando').not().isEmpty(),
+        check('descNuevo', 'Se debe especificar el componente con el que se esta reemplazando').not().isEmpty(),
+        check('motivo', 'Se debe especificar el motivo del cambio').not().isEmpty(),
 
 
         validarCampos

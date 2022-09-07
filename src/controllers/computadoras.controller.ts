@@ -284,7 +284,9 @@ export const getPCS = async (req: Request, res: Response) => {
 
 		const { sedeID = '', unidadID = '' } = req.query;
 
-		const computadoras = await Computadora.find({ ubicacion: sedeID, unidad: unidadID });
+		const computadoras = await Computadora.find({ ubicacion: sedeID, unidad: unidadID })
+			.populate('ubicacion', 'nombre')
+			.populate('unidad', 'nombre abreviatura');
 
 		res.json(computadoras)
 
